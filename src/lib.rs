@@ -3,7 +3,9 @@ use pinocchio::{
     address::declare_id, entrypoint, error::ProgramError, AccountView, Address, ProgramResult,
 };
 
-use crate::instructions::EscrowInstrctions;
+use crate::instructions::FundraiserInstruction;
+
+use pinocchio_log::log;
 
 mod instructions;
 mod state;
@@ -24,9 +26,12 @@ pub fn process_instruction(
         .split_first()
         .ok_or(ProgramError::InvalidInstructionData)?;
 
-    match EscrowInstrctions::try_from(discriminator)? {
+    match FundraiserInstruction::try_from(discriminator)? {
         // EscrowInstrctions::MakeV2 => instructions::process_make_instruction_v2(accounts, data)?,
+        FundraiserInstruction::Initialize => {
+            instructions::process_initialize_instruction(accounts, data)
+        }
         _ => return Err(ProgramError::InvalidInstructionData),
     }
-    Ok(())
+    // Ok(())
 }
