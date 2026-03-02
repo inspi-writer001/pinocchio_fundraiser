@@ -6,6 +6,7 @@ use pinocchio::Address;
 pub struct Fundraiser {
     pub maker: [u8; 32],
     pub mint_to_raise: [u8; 32],
+    pub vault: [u8; 32],
     pub amount_to_raise: [u8; 8],
     pub current_amount: [u8; 8],
     pub time_started: [u8; 8], // i64 / u64

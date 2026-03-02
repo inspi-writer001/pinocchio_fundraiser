@@ -27,9 +27,11 @@ pub fn process_instruction(
         .ok_or(ProgramError::InvalidInstructionData)?;
 
     match FundraiserInstruction::try_from(discriminator)? {
-        // EscrowInstrctions::MakeV2 => instructions::process_make_instruction_v2(accounts, data)?,
         FundraiserInstruction::Initialize => {
             instructions::process_initialize_instruction(accounts, data)
+        }
+        FundraiserInstruction::Deposit => {
+            instructions::process_contribute_instruction(accounts, data)
         }
         _ => return Err(ProgramError::InvalidInstructionData),
     }

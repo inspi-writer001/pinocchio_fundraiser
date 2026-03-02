@@ -6,13 +6,9 @@ use pinocchio::{
     AccountView, Address, ProgramResult,
 };
 use pinocchio_associated_token_account::instructions::Create;
-use pinocchio_log::log;
-use pinocchio_pubkey::derive_address;
+
 use pinocchio_system::instructions::CreateAccount;
-use pinocchio_token::{
-    instructions::InitializeAccount,
-    state::{Mint, TokenAccount},
-};
+use pinocchio_token::state::Mint;
 
 use crate::state::Fundraiser;
 
@@ -122,6 +118,7 @@ pub fn process_initialize_instruction(accounts: &[AccountView], data: &[u8]) -> 
     fundraiser_mutable.time_started = (sysvars::clock::Clock::get()?.unix_timestamp).to_le_bytes();
     fundraiser_mutable.duration = parsed_data.duration;
     fundraiser_mutable.bump = fundraiser_bump.to_le_bytes();
+    fundraiser_mutable.vault = vault.address().as_ref().try_into().unwrap();
 
     Ok(())
 }
