@@ -7,7 +7,7 @@ pub mod create_fundraiser {
     use litesvm::LiteSVM;
     use solana_instruction::{AccountMeta, Instruction};
     use solana_message::Message;
-    use solana_sdk_ids::{system_program, sysvar::rent};
+    use solana_sdk_ids::sysvar::rent;
     use solana_signer::Signer;
     use solana_transaction::Transaction;
 

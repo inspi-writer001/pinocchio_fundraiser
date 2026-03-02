@@ -4,30 +4,22 @@ pub mod donate;
 #[cfg(test)]
 mod tests {
 
-    use std::path::PathBuf;
-
     use litesvm::LiteSVM;
     use litesvm_token::{
         spl_token::{self},
-        CreateAssociatedTokenAccount, CreateMint, MintTo,
+        CreateAssociatedTokenAccount, CreateMint,
     };
 
-    // use pinocchio::sysvars::rent;
-    use solana_instruction::{AccountMeta, Instruction};
     use solana_keypair::Keypair;
-    use solana_message::Message;
+
     use solana_native_token::LAMPORTS_PER_SOL;
     use solana_pubkey::Pubkey;
-    use solana_sdk_ids::{system_program, sysvar::rent};
+    use solana_sdk_ids::system_program;
     use solana_signer::Signer;
-    use solana_transaction::Transaction;
 
-    use crate::{
-        instructions::{FundraiserInstruction, InitData},
-        tests::{
-            create_fundraiser::create_fundraiser::create_fundraiser_function,
-            donate::donate::donate_function,
-        },
+    use crate::tests::{
+        create_fundraiser::create_fundraiser::create_fundraiser_function,
+        donate::donate::donate_function,
     };
 
     const PROGRAM_ID: Pubkey = crate::ID;
